@@ -1,0 +1,6 @@
+.idea/
+Tests/
+vendor/
+composer.phar
+composer.lock
+test.php

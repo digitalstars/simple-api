@@ -1,5 +1,5 @@
 <?php
-namespace DigitalStar\SimpleAPI;
+namespace DigitalStar;
 
 class SimpleAPI {
     private $data = [];
