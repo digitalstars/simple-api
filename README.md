@@ -10,6 +10,7 @@ composer require digitalstars/simple-api
 Второй параметр - необходимые параметры. Если поставить ? перед ним, то считается не обязательным  
 Функция exit автоматически делает json_encode и возвращает браузеру json
 
+site.ru/api.php?module=auth&login=123&password=123
 ```php
 <?php
 require_once 'vendor/autoload.php';
