@@ -12,7 +12,7 @@ class SimpleAPI {
         if($this->data['module'] == $name & $this->array_keys_exist($params))
             $anon($this->data);
         else
-            return;
+            $this->exit(['error' => 'missed params']);
     }
 
     public function exit($array) {
