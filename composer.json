@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "DigitalStar\\SimpleAPI\\": "src/"
+            "DigitalStar\\": "src/"
         }
     }
 }
