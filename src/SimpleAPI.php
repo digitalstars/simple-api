@@ -9,7 +9,7 @@ class SimpleAPI {
     }
 
     public function module($name, $params, $anon) {
-        if($this->data['module'] == $name & $this->array_keys_exist($params))
+        if(isset($this->data['module']) & $this->data['module'] == $name & $this->array_keys_exist($params))
             $anon($this->data);
         else
             $this->exit(['error' => 'missed params']);
