@@ -11,10 +11,12 @@ class SimpleAPI {
     }
 
     public function module($name, $params, $anon) {
-        if($this->data['module'] == $name & $this->array_keys_exist($params))
-            $anon($this->data);
-        else
-            $this->exit(['error' => 'missed params']);
+        if($this->data['module'] == $name) {
+            if ($this->array_keys_exist($params))
+                $anon($this->data);
+            else
+                $this->exit(['error' => 'missed params']);
+        }
     }
 
     public function exit($array) {
