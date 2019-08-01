@@ -5,11 +5,13 @@ class SimpleAPI {
     private $data;
 
     public function __construct() {
+        if(!isset($this->data['module']))
+            $this->exit(['error' => 'missed params']);
         $this->data = $_POST + $_GET;
     }
 
     public function module($name, $params, $anon) {
-        if(isset($this->data['module']) & $this->data['module'] == $name & $this->array_keys_exist($params))
+        if($this->data['module'] == $name & $this->array_keys_exist($params))
             $anon($this->data);
         else
             $this->exit(['error' => 'missed params']);
