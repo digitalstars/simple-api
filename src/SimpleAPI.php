@@ -5,9 +5,9 @@ class SimpleAPI {
     private $data;
 
     public function __construct() {
+        $this->data = $_POST + $_GET;
         if(!isset($this->data['module']))
             $this->exit(['error' => 'missed params']);
-        $this->data = $_POST + $_GET;
     }
 
     public function module($name, $params, $anon) {
