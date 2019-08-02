@@ -2,7 +2,8 @@
 namespace DigitalStars;
 
 class SimpleAPI {
-    private $data;
+    private $data = [];
+    public $answer = [];
 
     public function __construct() {
         $this->data = $_POST + $_GET;
@@ -10,16 +11,22 @@ class SimpleAPI {
             $this->exit(['error' => 'missed params']);
     }
 
+    public function __destruct() {
+        $this->exit($this->answer);
+    }
+
     public function module($name, $params, $anon) {
         if($this->data['module'] == $name) {
-            if ($this->array_keys_exist($params))
+            if ($this->array_keys_exist($params)) {
                 $anon($this->data);
+                exit();
+            }
             else
                 $this->exit(['error' => 'missed params']);
         }
     }
 
-    public function exit($array) {
+    private function exit($array) {
         header('Content-Type: application/json');
         exit(json_encode($array));
     }
