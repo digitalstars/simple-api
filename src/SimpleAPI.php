@@ -10,14 +10,17 @@ class SimpleAPI {
 
     public function __construct() {
         $this->data = $_POST + $_GET;
-        if(isset($this->data['json_data']))
-            $this->data = json_decode($this->data['json_data'], true);
 
-        if (!isset($this->data['module'])) {
-            $this->answer['error'] = 'missed module';
-            exit();
-        } else
+        if (!isset($this->data['module']))
+            $this->error('missed module');
+        else {
             $this->module = $this->data['module'];
+            if(isset($this->data['json_data'])) {
+                $this->data = json_decode($this->data['json_data'], true);
+                if($this->data == null)
+                    $this->error('json invalid');
+            }
+        }
     }
 
     public function __destruct() {
@@ -34,11 +37,9 @@ class SimpleAPI {
         if(!$this->flag) {
             $this->flag = 1;
             if ($this->array_keys_exist($params))
-                return true;
-            else {
-                $this->answer['error'] = 'missed params';
-                exit();
-            }
+                return $this->data;
+            else
+                $this->error('missed params');
         } else
             exit();
     }
