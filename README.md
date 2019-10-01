@@ -1,7 +1,7 @@
 # SimpleAPI
 
 ## Подключение
-composer require digitalstars/simple-api
+composer require digitalstars/simple-api-php
 
 ## Как с этим работать
 Скрипту обязательно должен приходить параметр module с названием модуля.  
