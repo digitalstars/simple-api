@@ -1,6 +1,6 @@
 {
-    "name": "digitalstars/simple-api",
-    "description": "Библиотека для простого создания api",
+    "name": "digitalstars/simple-api-php",
+    "description": "Библиотека для простого создания POST/GET API",
     "license": "MIT",
     "minimum-stability": "stable",
     "authors": [
