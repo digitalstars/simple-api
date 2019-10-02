@@ -10,6 +10,7 @@
 * В переменную answer добавляются необходимые данные для фронта. В конце выполнения кейса, библиотека автоматически вызывает деструктор и данные в json формате отправляются фронту.
 * если вам удобнее передавать много данный в json формате, то передавайте его в параметр json_data
 * breake в кейсах ставить не надо, будет и без них нормально работать. Если не нравится инспекции в IDE о пропущенном  break, то просто выключите его
+* если в answer передать в массив, он автоматически конвертируется в json
 * есть метод error, в который передается текст. Этот метод завершает скрипт и возвращает на фронт json вида:
 ```{"error":"ваш текст"}```
 
@@ -49,14 +50,15 @@ $api = new SimpleAPI();
 switch ($api->module) {
     case 'auth':
         $data = $api->params(['login', 'password', '?name']);
-        if(isset($data['name']]))
+        if(isset($data['name']])) {
             $api->answer['status'] = true;
-        else
+            $api->answer['info'] = ['login' => $data['login'], 'password' => $data['password']];
+        } else
             $api->answer['status'] = false;
 }
 ```
 Ответ в json:
-```{"status" : true}```
+```{"status" : true, "info":{"login":"admin", "password":"admin"}}```
 
 ## Пример №3 использование функции error
 Запрос:  
