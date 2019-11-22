@@ -1,5 +1,4 @@
 <?php
-
 namespace DigitalStars;
 
 class SimpleAPI {
@@ -9,18 +8,22 @@ class SimpleAPI {
     public $module = '';
 
     public function __construct() {
+        if($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+            exit();
+        }
+
         $this->data = $_POST + $_GET;
 
-        if (!isset($this->data['module']))
-            $this->error('missed module');
-        else {
-            $this->module = $this->data['module'];
-            if(isset($this->data['json_data'])) {
-                $this->data = json_decode($this->data['json_data'], true);
-                if($this->data == null)
-                    $this->error('json invalid');
-            }
+        if (!isset($this->data['module'])) {
+            $this->data = json_decode(file_get_contents('php://input'), 1);
+            if ($this->data != null) {
+                if(!isset($this->data['module'])) {
+                    $this->error('missed module');
+                }
+            } else
+                $this->error('json invalid');
         }
+        $this->module = $this->data['module'];
     }
 
     public function __destruct() {
