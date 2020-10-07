@@ -6,6 +6,7 @@ class SimpleAPI {
     private $flag = 0;
     public $answer = [];
     public $module = '';
+    public $destruct_func = null;
 
     public function __construct() {
         if($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -28,7 +29,11 @@ class SimpleAPI {
 
     public function __destruct() {
         header('Content-Type: application/json');
-        exit(json_encode($this->answer));
+        if (isset($this->answer['error']))
+            http_response_code(501);
+        if (is_callable($this->destruct_func))
+            call_user_func($this->destruct_func, $this->answer);
+        exit(json_encode($this->answer, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
     public function error($text) {
@@ -49,7 +54,7 @@ class SimpleAPI {
 
     private function array_keys_exist($keys) {
         foreach ($keys as $key) {
-            if ($key{0} == '?')
+            if ($key[0] == '?')
                 continue;
             if (!array_key_exists($key, $this->data) | !isset($this->data[$key]))
                 return false;
