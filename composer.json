@@ -2,7 +2,7 @@
     "name": "digitalstars/simple-api-php",
     "description": "Библиотека для простого создания POST/GET API",
     "license": "MIT",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "ZeRoX",
