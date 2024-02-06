@@ -1,3 +1,4 @@
 <?php
-namespace DigitalStars;
-require_once(__DIR__.'/src/SimpleAPI.php');
+namespace DigitalStars\SimpleAPI;
+require_once(__DIR__.'/src/API.php');
+require_once(__DIR__.'/src/Module.php');
