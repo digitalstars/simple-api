@@ -2,8 +2,6 @@
 
 namespace DigitalStars\SimpleAPI;
 
-require_once __DIR__ . '/Exception.php';
-
 class API {
     /** Объект API. Единый, доступный всем модулям
      * @var API
