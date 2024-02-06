@@ -79,9 +79,12 @@ class API {
         $this->data = $_POST + $_GET;
         if (!isset($this->data['method'])) {
             $raw_data = file_get_contents('php://input');
-            if (empty($raw_data))
-                $this->echo_error('data is empty');
-            $this->data = json_decode($raw_data, 1);
+            if (empty($raw_data)) {
+                if (empty($this->data))
+                    $this->echo_error('data is empty');
+            } else {
+                $this->data = json_decode($raw_data, 1);
+            }
             if ($this->data != null) {
                 if (!isset($this->data['method'])) {
                     $this->echo_error('missed method');
