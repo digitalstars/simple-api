@@ -283,6 +283,7 @@ class API {
             $this->answer = 'error:' . $text;
         else
             $this->answer['error'] = $text;
+        $this->__destruct();
         exit();
     }
 
