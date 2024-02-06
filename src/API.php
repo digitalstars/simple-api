@@ -205,6 +205,7 @@ class API {
      * @return array|false|string - вывод, который возвращает API
      */
     private function closeAPI() {
+        $this->is_open_stream = false;
         foreach ($this->before_destruct_func_list as $i => $func) {
             $time_log = $this->timerStart();
             $func($this);
@@ -238,8 +239,6 @@ class API {
     public function close(): bool {
         if (!$this->is_open_stream || $this->isChildProcess())
             return true;
-
-        $this->is_open_stream = false;
 
         $content = $this->closeAPI();
         echo $content;
