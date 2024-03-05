@@ -74,6 +74,10 @@ class API {
     public array $store = [];
 
     private function __construct() {
+        if($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            exit();
+        }
+
         $this->time_start = $this->timerStart();
 
         $this->data = $_POST + $_GET;
