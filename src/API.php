@@ -174,10 +174,10 @@ class API {
     }
 
     /** Возвращает имя метода, который был вызван
-     * @return string
+     * @return string|null
      */
-    public function getMethod(): string {
-        return $this->run_method_name;
+    public function getMethod(): ?string {
+        return empty($this->run_method_name) ? ($this->data['method'] ?? null) : $this->run_method_name;
     }
 
     /** Возвращает имя модуля, который был вызван
