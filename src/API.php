@@ -139,14 +139,16 @@ class API {
                     $this->logTimerStop('Method', $time_module);
                 } catch (\Throwable $e) {
                     $this->logTimerStop('Method', $time_module);
-                    $this->echo_error($e instanceof Exception ? $e->getMessage() : $e->__toString());
+                    $this->echo_error($e->getMessage(), false);
+                    throw $e;
                 }
             } else {
                 try {
                     $this->validate();
                     $this->echo_error('missed params');
                 } catch (\Throwable $e) {
-                    $this->echo_error($e instanceof Exception ? $e->getMessage() : $e->__toString());
+                    $this->echo_error($e->getMessage(), false);
+                    throw $e;
                 }
             }
             return;
@@ -278,16 +280,22 @@ class API {
 
     /** Выводить ошибку в ответ и завершает выполнение
      * @param string $text
+     * @param bool $is_exit
      * @return void
      */
-    private function echo_error(string $text): void {
+    private function echo_error(string $text, bool $is_exit = true): void {
         http_response_code(501);
         if ($this->is_ignore_json_header)
             $this->answer = 'error:' . $text;
         else
             $this->answer['error'] = $text;
-        $this->__destruct();
-        exit();
+
+        if ($is_exit) {
+            $this->__destruct();
+            exit();
+        }
+
+        $this->close();
     }
 
     /** Возвращает время старта API
