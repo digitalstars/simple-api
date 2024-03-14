@@ -273,7 +273,7 @@ class API {
     public function error(string $text): void {
         $e = new Exception($text);
         $this->saveError($e);
-        throw $e;
+        $this->echo_error($text);
     }
 
     /** Выводить ошибку в ответ и завершает выполнение
